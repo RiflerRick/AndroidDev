@@ -20,7 +20,7 @@ If we write a device driver in a Linux kernel its source code must be released. 
 
 - A managed execution env- Run efficiently java based apps and some other system services. In early versions it was the Darvik vitual machine which has now been replaced by the ART(Android runtime). It uses what is called an ahead of time compilation model rather than a just in time compilation model and a virtual machine model. It is optimized.
 
-**Andriod Libraries**
+**Android Libraries**
 
 Libraries written in java specifically designed for android.
 
