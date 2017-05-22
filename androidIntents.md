@@ -102,4 +102,45 @@ the methods setClass and setComponent return an intent and hence it is possible 
  
  - Action: An action generally describes an operation to perform or an event that has already occurred. An operation to perform represents and activity whereas an event that has occurred represents a broadcast receiver. An action is similar to a method name with a set of arguments. An action is designated with a java string. An action should be as specific as possible. For example these are sets of actions typically used: ACTION_CALL, ACTION_EDIT, ACTION_BATTERY_LOW, ACTION_HEADSET_PLUG and so on.
     
+    An action is generally defined as a protocol. For example the ACTION_VIEW action(predefined by the Intent class) is used to simply display data to the user. The input is the uri from which to retrieve the data and there is no output at all. Similarly ACTION_PICK is the action which is used to pick an item from a list. The input is the URI of the directory of the data from which to pick an item and the ouput is the URI of the item that was picked.
     
+  - Data: This elment defines the data that the action element should act upon. For example the ACTION_CALL action, the data column would be tel:<uri>
+  
+  ```
+  Intent i=new Intent(Intent.ACTION_CALL, Uri.parse("tel:+911"));
+  
+  ```
+  The Uri.parse is important as the data needs to be formatted as a uri.
+  
+  Also,
+  
+  ```
+  Intent i=new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:+911"));
+  
+  ```
+  
+  Similarly:
+  
+  ```
+  Intent i=new Intent(Intent.ACTION_VIEW, Uri.parse("geo:"+"36.1486"+","+"86.4152"));
+  
+  ```
+  
+  The type of data can also be explicitly set in the Intent object. 
+  ```
+  Intent makeGalleryIntent(String pathToFile){
+  return new Intent(Intent.ACTION_VIEW).setDataAndType(Uri.parse("file://"+pathToFile),"image/*");
+  }
+  ```
+  Here `image/*` is the type of data 
+     
+  - Extras: Extras provide additional information along with an intent. Simply key value pairs. 
+  
+  ```
+  Intent i=new Intent(Intent.ACTION_SEND).putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"rajdeep.mukherjee295@gmail.com","rajdeepmukhrj@gmail.com"});
+  
+  ```
+    
+  - Category: A category is simply the element that provides the intent with the type of component that can handle an intent.  
+    
+   
