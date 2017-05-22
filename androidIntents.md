@@ -26,3 +26,80 @@ Intents offer late runtime binding to components which simply means that compone
 **The mapping of components to processes is done in the AndroidManifest.xml file.**
 
 In general there are tradeoffs between performance and robustness. If there are many components in the same process it may improve performance but hamper robustness. Runtime discovery of components is in general very powerful and helpful. The components don't have to know about each other and can be extended and integrated dynamically. An app choose can be used for instance to select which app to select for running a specific process.
+
+### Elements in an Android Intent
+
+Elements in an android intent are the following: name, action, data, category, extras, flags.
+The action, data and extras are of interest to the component receiving the intent whereas the others are of interest to the android framework itself.
+
+There are 2 types of intents: explicit intent and implicit intent. Explicit intents are the ones in which the intent has the name of the recipient service or activity. These are tightly coupled intents whereas the intent may not have the name of the recipient in which case they become the loosely coupled intent and it is upon the android activity manager to figure out which services or activities have registered for that particular intent. 
+
+#### Intent API
+
+The intent api in android has many methods to work with. For example an intent can be used in the following manner:
+
+```
+Intent intent=new Intent(ACTION_VIEW, data);//data here is the Uri possibly
+intent.putExtra("Today","22ndMay2017");
+intent.putExtra("Pi",3.14);
+intent. putExtra("isHot",true);
+intent.putExtra("answer",42);
+
+startActivity(intent);
+```
+obviously as it was said intents are like key value pairs and the final startActivity() method is used to start the activity with the intent. senders can use setter methods. 
+
+The component that actually gets the intents have getter methods to get the intent
+
+```
+Intent i=getIntent();
+Uri data=i.getData();
+String s=i.getStringExtra("Today");
+Float f=i.getFloatExtra("Pi");
+```
+
+We can get the various fields using getter methods however it is upto us to get the proper types right.
+
+### Android intent elements in detail:
+
+- Name: Identifies the name element that can receive an intent. It is obviously optional as is clear from the discussion of implicit and explicit intents. A named or explicit intent is sent to the instance of a designated class. 
+
+Creating an explicit intent:
+
+```
+Intent intent=new Intent(this, C.class);
+```
+
+`this` is basically referring to the object being called which is generally an activity and `C.class` indicates the class that you are making an explicit intent for.
+
+Another way of doing this same thing would be the following:
+
+```
+Intent intent=new Intent().setComponent(name).setClass(this, C.class);
+```
+
+the methods setClass and setComponent return an intent and hence it is possible to do this. **Explicit intents are typically used to bind components inside the same application. Explicit intent is particularly important when we are binding services. In recent versions of android it is not possible to bind a service with an implicit intent.**
+ 
+ An implicit intent as had been said earlier is the one where the component to be used to figured out at runtime.
+ 
+ Creating an implicit intent:
+ 
+ ```
+ Intent i=new Intent(Intent.ACTION_VIEW, uri);
+ 
+ ```
+ 
+ There is also another way to do this:
+ 
+ ```
+ Intent i=new Intent().setAction(Intent.ACTION_VIEW).setData(uri);
+ 
+ ```
+ 
+ implicit intents are typically used to interact with components that reside in other apps.
+ 
+ **Implicit intents are typically used to bind activity to activity relationships and activity to boradcast receiver component relationships. As said earlier in case of activity to service relationships the explicit intents are used.**
+ 
+ - Action: An action generally describes an operation to perform or an event that has already occurred. An operation to perform represents and activity whereas an event that has occurred represents a broadcast receiver. An action is similar to a method name with a set of arguments. An action is designated with a java string. An action should be as specific as possible. For example these are sets of actions typically used: ACTION_CALL, ACTION_EDIT, ACTION_BATTERY_LOW, ACTION_HEADSET_PLUG and so on.
+    
+    
