@@ -31,7 +31,24 @@ The best way to understand the activity lifecycle is through a UML diagram:
 ![](https://raw.githubusercontent.com/RiflerRick/AndroidDev/master/assets/stopped.PNG)
 ![](https://raw.githubusercontent.com/RiflerRick/AndroidDev/master/assets/destroyed.PNG)
 
+### Starting an Activity:
 
+An activity can be started on demand via an intent passed as a arguement to the `startActivity(<intent>)` method. The intent is an implicit intent typically although it can also be an exlicit intent except that explicit intents are generally used in case of services rather than activities. startActivity method passes this intent to the ActivityManagerService, the ActivityManagerService then does the necessary intent filtering and resolution to that intent and sees which are the activities that can handle the intent. Mind you here that the intents are not resolved programmatically in any way, these intents are resolved by the android framework's activity manager service and hence the programmer does not need to know or care of what activities are going to be called here.
+ 
+ Then the control passes on target activity's onCreate() method and the intent is passed to this activity.
+ 
+ Following are the methods that are required to start an Activity:
+ - `void startActivity(Intent intent)`- This will simply launch a new activity
+ - `void startActivityForResult(Intent intent, int requestCode)`- starts an activity from which you would want a result when finished. 
+ 
+ It is obviously clear that the method to choose depends on the return result needed from the activity if any.
+ 
+ Now understand that the `startActivity(Intent intent)` method is pretty straightforward in that it is a callback function, hence does not block other operations, moreover since this function simply calls the activity and does not request for any result, its implementation is less complex and easy to make however when it comes to the other method, `startActivityForResult(Intent intent, inr requestCode)`, its implementation is little more complicated, however we can do that slow and steady.
+ 
+ **`startActivityForResult(Intent intent, int requestCode)`**
+ 
+ 
+ 
  
  
  
