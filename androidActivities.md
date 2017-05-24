@@ -24,7 +24,14 @@ The logging class simply means that when the logging methods are called back, al
   - onRestart(), onStart(), onResume(), onPause(), onStop() and so on.
   
 The best way to understand the activity lifecycle is through a UML diagram:
- 
+
+![](https://raw.githubusercontent.com/RiflerRick/AndroidDev/master/assets/starting.PNG)
+![](https://raw.githubusercontent.com/RiflerRick/AndroidDev/master/assets/running.PNG)
+![](https://raw.githubusercontent.com/RiflerRick/AndroidDev/master/assets/paused.PNG)
+![](https://raw.githubusercontent.com/RiflerRick/AndroidDev/master/assets/stopped.PNG)
+![](https://raw.githubusercontent.com/RiflerRick/AndroidDev/master/assets/destroyed.PNG)
+
+
  
  
  
