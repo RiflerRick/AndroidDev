@@ -141,6 +141,54 @@ the methods setClass and setComponent return an intent and hence it is possible 
   
   ```
     
-  - Category: A category is simply the element that provides the intent with the type of component that can handle an intent.  
+  - Category: A category is simply the element that provides the intent with the type of component that can handle an intent. It provides this information to the android activity manager service. There are various types of predefined categories:
+  
+  CATEGORY_DEFAULT: Allows activity to be started by an implicit Intent when no specific category is assigned to it. Similarly others.
     
+  ```
+  Intent i=new Intent(Intent.ACTION_VIEW).addCategory(Intent.CATEGORY_BROWSABLE);
+  ```
+  - Flags: Again used to set different types of flags. Is of interest to the android activity manager
+  
+  ```
+  Intent i =new Intent(Intent.ACTION_SEND).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY| Intent.FLAG_DEBUG_LOG_RESOLUTION);
+  ```
+  
+  The new activity is not kept in the history stack. The FLAG_DEBUG_LOG_RESOLUTION is used to print debug messages during the resolution of an intent to show whats been found to create the final resolved list.
+  
+### Android Manifest file
+
+The AndroidManifest.xml file is used to provide certain types of information to the app. Actually a lot of information. 
+- app java package
+- components, classes and capabilities- which components are exported, component names and which processes will be used to host the components, what intents are handled by the components.
+- permissions the app must have
+- minimum and target api levels. gradle build file
+
+Key elements of the android manifest file:
+
+<application></application> tag: it is a container for specifying various app components. 
+<activity></> tag: implements part of apps visual interface. 
+<service></> tag: implement long duration background operations. In general services should not have intent filters.
+<receiver></> tag: Broadcast receivers can be used by apps to receive broadcast intents even when other app components are not running.
+<provider></> tag: Supply structured access to data managed by apps.
+ 
+ In case of an explicit intent the filters in an androidManifest.xml file are not consulted. An implicit intent is delivered to a target component only if a filter matches. Intent filters describe which types of intents a component can handle. The activity manager service uses the intent filters to match proper intents and bind intents to specific activities. The extra and flag components play no part isn resolving which intent is to be bound to which target activity. An implicit intent is tested in all 3 areas ie. There can be multiple intent filters assigned to a particular activity.
+ 
+ Statically declared intents are specified and defined declaratively in the android manifest.xml file.
+  
+ It is also possible however to dynamically configure an intent. This means that we define intents through java code.
+   
+   ```
+   final BroadcastReceiver mReceiver=new SendBroadcastReceiver();
+   
+   IntentFilter intentFilter=new IntentFilter(Intent.ACTION_SEND);
+   intentFilter.setType("*/*");
+   registerReceiver(mReceiver, intentFilter);
+   ```
+   
+   
+   
+   
+ 
+  
    
