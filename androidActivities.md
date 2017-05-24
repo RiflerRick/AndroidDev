@@ -46,7 +46,32 @@ An activity can be started on demand via an intent passed as a arguement to the 
  Now understand that the `startActivity(Intent intent)` method is pretty straightforward in that it is a callback function, hence does not block other operations, moreover since this function simply calls the activity and does not request for any result, its implementation is less complex and easy to make however when it comes to the other method, `startActivityForResult(Intent intent, inr requestCode)`, its implementation is little more complicated, however we can do that slow and steady.
  
  **`startActivityForResult(Intent intent, int requestCode)`**
+ This method is also asynchronous but is a 2 way method which means we need to use it when we wanna call another activity and also get some results from that activity. The second argument is basically used to identify the request to activity 2 so that when activity 2 is done and sends a response to activity 1 it can handle that request appropriately. 
+  
+ Inside activity 2 is a method called `setResult(RESULT_OK, data)` and this result code and data will be sent in turn to the activity 1 for making use of it in activity 1. Now in activity 1 is the method `onActivityResult(inr requestCode, inr resultCode, Intent data)`. This method is returned via a callback from the androidActivityFramework. One thing we get back is actually the request code which is used to see if the request code we required is the one we are actually getting from the activity that sent us the request.
+   
+ ### Finishing an Activity
  
+ When an activity is done it can set its result using the `setResult()` method. It can take in as its parameter, stuff like the result code as well as the intent which would contain the data that would be used by the source activity for other purposes. A result code may be RESULT_OK, or RESULT_CANCELLED
+ 
+ Finally we would call the method `finish()`
+ 
+ LifeCycle hook methods are called in the context of UI threads:
+ 
+ - onCreate()- called to initialize an activity when its first created. In a sense it plays the role of a virtual constructor. Typically it is used to initialize global activity state, stuff like inflating, configuring and caching UI views as needed as well as setting the activity's content view which is how the activity displays itself to the user.
+ 
+ - onStart()- called when the activity is becoming visible to the user. This may be called back many times during the lifecycle of an activity. Typically used to reset app state and behaviour for example can be used to load data from persistent storage. 
+ 
+ -onResume()- called when the activity will start interacting with the user. When onResume() returns the activity has focus and can respond to user input. Typically used for starting foreground behaviours like animations.
+ 
+ -onPause()- called when the user leaves an activity but it is stil visible on the background. It has no longer got the focus of control however it has not disappeared from the screen. onPause() should be used to perform important cleanup operations such as committing unsaved state or perhaps releasing system resources such as broadcast receivers and so on.
+ 
+ -onStop()- is called when the activity is no longer visible to the user. Typically used to perform non-essential operations such as caching which is good to perform but if not performed will not result in problems or the app behaving in a buggy fashion.
+ 
+ -onRestart()- is called when the activity comes to foreground after being stopped.
+ 
+ **One important thing to note is that when we create our own implementation of the onCreate() method it is the programmer's job to call the super class implementation of the onCreate() method also in order for the code to function properly because the super class method actually does a few more things important to the system.**
+ - 
  
  
  
