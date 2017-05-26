@@ -71,7 +71,23 @@ An activity can be started on demand via an intent passed as a arguement to the 
  -onRestart()- is called when the activity comes to foreground after being stopped.
  
  **One important thing to note is that when we create our own implementation of the onCreate() method it is the programmer's job to call the super class implementation of the onCreate() method also in order for the code to function properly because the super class method actually does a few more things important to the system.**
- - 
+ 
+ ### Managing Multiple Activities in the Task BackStack
+ 
+ It is a very basic algorithm which defines how android manages multiple activities using a structure called a backstack which is very similar in structure and function to the callstack used in case of functions in programming languages.
+ 
+ Whenever a new activity is on the screen that activity gets loaded on top of the backstack and whenever the we press the backbutton or the activity gets paused, destroyed and so on, it is popped out of the stack.
+  
+ ### Design Constraints on Activity Concurrency
+ 
+ First of all android apps have only one UI thread. All components in a process use the same UI thread. They use these thread for various things such as receive system notifications, broadcasts, interacting with users and preforming activity life cycle operations. The UI toolkit components must only be accessed by the UI thread. Because internally they are not synchronized and hence they can cause concurrency hazards like race conditions and so on if they were to come from separate threads. All activity methods run in the UI thread ad must be of short duration and they should be non-blocking otherwise the 'Application Non Responding' error or 'ANR' will arise. **Hence any long-running operations such as downloading files, getting content from remote databases, reading and writing to databases and so on must be done on separate background thread and concurrency frameworks should be used to handle such tasks.**
+  
+  ### Android Concurrency Frameworks:
+  
+  - HAMER framework: Handlers, Messages and Runnables - In this framework, operations can run in one or more threads and when they are ready to publish their results they can do so to the UI thread.
+  
+  - Async Task Framework: Here also operations run in one or more background threads and publish the result to the UI thread without directly using threads, handlers, messages and runnables. The Async task framework in a sense abstracts away most of the lower level details.
+ 
  
  
  
