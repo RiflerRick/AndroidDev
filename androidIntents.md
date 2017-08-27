@@ -166,11 +166,11 @@ The AndroidManifest.xml file is used to provide certain types of information to 
 
 Key elements of the android manifest file:
 
-<application></application> tag: it is a container for specifying various app components. 
-<activity></> tag: implements part of apps visual interface. 
-<service></> tag: implement long duration background operations. In general services should not have intent filters.
-<receiver></> tag: Broadcast receivers can be used by apps to receive broadcast intents even when other app components are not running.
-<provider></> tag: Supply structured access to data managed by apps.
+`<application></application>` tag: it is a container for specifying various app components. 
+`<activity></>` tag: implements part of apps visual interface. 
+`<service></>` tag: implement long duration background operations. In general services should not have intent filters.
+`<receiver></>` tag: Broadcast receivers can be used by apps to receive broadcast intents even when other app components are not running.
+`<provider></>` tag: Supply structured access to data managed by apps.
  
  In case of an explicit intent the filters in an androidManifest.xml file are not consulted. An implicit intent is delivered to a target component only if a filter matches. Intent filters describe which types of intents a component can handle. The activity manager service uses the intent filters to match proper intents and bind intents to specific activities. The extra and flag components play no part isn resolving which intent is to be bound to which target activity. An implicit intent is tested in all 3 areas ie. There can be multiple intent filters assigned to a particular activity.
  
