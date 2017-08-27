@@ -128,5 +128,69 @@ myTextView=(TextView)findViewById(R.id.toyNames);
 Obviously the nomenclature of the resource instance passed as a parameter to findViewById() is the same. R.resource_type.resource_name.
  
  pro-tip: `\n\n\n` means a single `\n` in the view in android.
+ Another pro tip: Remember how in python it is possible to very easily go for the for in loop, in a similar fashion, java actually has the same thing integrated following the following syntax
  
+```java
+String[] list = new String[10];
+//populate the string
+for (String item:list)
+{
+    System.out.println(item); //pretty cool huh
+}
+ 
+```
+
+### Logging and Understanding logging levels
+
+Logging is a very fundamental part of any form of programming. The logging levels present in the android studio are the following:
+- error
+- warn
+- info
+- debug
+- verbose
+
+These errors are in order of increasing verboseness and severity. Error, warn and info level messages are always preserved in release versions. So you can essentially debug them later after the entire app has been released. The general way that logging is done is the following:
+
+`Log.x(String TAG, String message);`
+
+Here x can be some letter. Tag can be essentially any string you want but a common strategy is to use the class name as tag. This makes it easy to search in the application log.
+
+The following commands are used for the following logs:
+- error: `Log.e(String TAG, String message);`. For logging obvious error messages
+- warn: `Log.w(String TAG, String message);`. For logging things that do not make your application crash but remain a concern.
+- info: `Log.i(String TAG, String message);`. For informational messages like being connected to the internet for instance.
+- debug: `Log.d(String TAG, String message);`. At times when you wanna give very granular information. For instance this is used for the simple purpose of outputting the url that a function is composed and stuff like that.
+- verbose: `Log.v(String TAG, String message);`. Verbose is like when you wanna have very granular information about your app.
+
+There is a special logging level that comes with android called the WTF logging level which stands for `What a terrible Failure`. These are the errors that should actually never happen. 
+ 
+### Networking
+
+ The next part would be networking as in how to communicate with the network in order to get things started. Following the course from udacity it is important to note that we would like to have a layout designed before we get our hands dirty in actual code to do what we plan to do. 
+ 
+#### Resources
+ 
+What is the res directory:
+The res directory is the place where we would wanna store stuff like images, strings and layouts. Its included in every android project. Inside the res directory there are sub folders for the following types of resources:
+
+- values: XML files containing simple values such as strings and integers. 
+- drawable: A bunch of visual files, including Bitmap file types and shapes. 
+- layouts: XML layouts for our apps.
+
+Other resources include:
+- animator: XML files for property animations.
+- anim: XML files for tween animations.
+- color: XML files that define state list colors.
+- mipmap: Drawable files for launcher icons. 
+- raw: Simply putting raw files, virtuallu any kind of files can be put here. For instance we can put the audio files here.
+- xml: Arbitrary xml for instance if you have xml configuration files. 
+
+In java you can get a simple string stored in res->value->strings.xml. This file can have contents like the following:
+
+```xml
+<string name="today">Today</string>
+<string name="tomorrow">Tomorrow</string>
+```
+
+
  
