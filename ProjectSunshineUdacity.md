@@ -100,6 +100,33 @@ Files saved in the assets/ directory are not given a resource ID, so you can't r
 
 However, if all you require is the ability to read raw data (such as a video or audio file), then save the file in the res/raw/ directory and read a stream of bytes using `openRawResource()`.
 
+#### setContentView() method:
+So what is the setContentView method doing? It inflates the layout. Essentially what happens is that Android reads your XML file and generates Java objects for each of the tags in your layout file. You can then edit these objects in the Java code by calling methods on the Java objects. We’ll go over what these methods look like and how to access view in your layout files later in the course.
 
+### Accessing xml components using the xml 'id' attribute:(accessing resources using xml)
+
+First in the xml page, the component is given an id in the following way: 
+
+```
+<TextView   
+    android:id="@+id/toyName"
+/>
+```
+Notice how the id is given. This is reminiscent of the way we access resources using xml. `@+id/toyName`
+- `@` tells the tools not to treat whatever is written inside the quotes as a string literal and to instead look for the contents inside the android resources. 
+
+- `+` tells the tools that we are dealing with a component that does not yet exists and should be created anew.
+
+After it is just the type of resource and the name of the resource as discussed already. 
+
+Now in the java code we create a TextView instance and use the method `findViewById()` method to assign a TextView instance to it.
+
+```
+TextView myTextView;
+myTextView=(TextView)findViewById(R.id.toyNames);
+```
+Obviously the nomenclature of the resource instance passed as a parameter to findViewById() is the same. R.resource_type.resource_name.
+ 
+ pro-tip: `\n\n\n` means a single `\n` in the view in android.
  
  
